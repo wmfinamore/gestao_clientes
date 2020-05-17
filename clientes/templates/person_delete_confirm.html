@@ -5,10 +5,11 @@
 
 {% block main %}
 <br>
+<div class="jumbotron">
 <h1>Tem certeza que deseja deletar a {{ person.first_name }}?</h1>
  <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
         <button type="submit" class="btn btn-danger"> Delete </button>
     </form>
-
+</div>
 {% endblock %}

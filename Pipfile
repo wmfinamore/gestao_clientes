@@ -13,6 +13,8 @@ python-decouple = "*"
 dj-database-url = "*"
 dj-static = "*"
 gunicorn = "*"
+django-bootstrap-form = "*"
+django-crispy-form = "*"
 
 [requires]
 python_version = "3.7"

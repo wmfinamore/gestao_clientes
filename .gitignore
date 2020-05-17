@@ -3,4 +3,3 @@
 *.sqlite3
 /media
 .env
-/static
