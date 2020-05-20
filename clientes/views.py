@@ -6,7 +6,14 @@ from .forms import PersonForm
 
 @login_required
 def Persons_list(request):
-    persons = Person.objects.all()
+    nome = request.GET.get('nome', None)
+    sobrenome = request.GET.get('sobrenome', None)
+
+    if nome or sobrenome:
+        persons = Person.objects.all()
+        persons = persons.filter(first_name__icontains=nome, last_name__icontains=sobrenome)
+    else:
+        persons = Person.objects.all()
     return render(request, 'person.html', {'persons': persons})
 
 
