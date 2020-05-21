@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+
+{% block title %} Lista de Clientes {% endblock %}
+
+{% block main %}
+    <h1>Lista de Clientes</h1>
+    <br>
+    {% for person in object_list %}
+        <li>{{ person.first_name }}</li>
+    {% endfor %}
+
+{% endblock %}
+
