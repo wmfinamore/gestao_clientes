@@ -7,7 +7,7 @@
     <h1>Lista de Clientes</h1>
     <br>
     {% for person in object_list %}
-        <li>{{ person.first_name }}</li>
+<li><a href="{% url 'person_detail_cbv' person.id %}">{{ person.first_name }}</a></li>
     {% endfor %}
 
 {% endblock %}
