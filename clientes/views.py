@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 
 from .models import Person
 from .forms import PersonForm
@@ -61,3 +61,8 @@ class PersonDetail(DetailView):
         context = super().get_context_data()
         context['now'] = timezone.now()
         return context
+
+class PersonCreate(CreateView):
+    model = Person
+    fields = ['first_name', 'last_name', 'age', 'salary', 'bio', 'photo']
+    success_url = '/clientes/person_list/'

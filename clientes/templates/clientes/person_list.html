@@ -9,6 +9,8 @@
     {% for person in object_list %}
 <li><a href="{% url 'person_detail_cbv' person.id %}">{{ person.first_name }}</a></li>
     {% endfor %}
+<br>
+<a href="{% url 'person_create_cbv' %}" class="btn btn-info">Novo</a>
 
 {% endblock %}
 
