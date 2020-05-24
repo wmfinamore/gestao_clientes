@@ -6,9 +6,34 @@
 {% block main %}
     <h1>Lista de Clientes</h1>
     <br>
-    {% for person in object_list %}
-<li><a href="{% url 'person_detail_cbv' person.id %}">{{ person.first_name }}</a></li>
-    {% endfor %}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for person in object_list %}
+            <tr>
+            <th scope="row">{{ person.id }}</th>
+            <td><a href="{% url 'person_detail_cbv' person.id %}">
+                {{ person.first_name }}
+                </a>
+            </td>
+            <td><a href="{% url 'person_update_cbv' person.id %}" class="btn btn-secondary btn-sm">
+                Editar
+                </a>
+                <a href="{% url 'person_delete_cbv' person.id %}" class="btn btn-danger btn-sm">Excluir</a>
+            </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+
+
+</table>
 <br>
 <a href="{% url 'person_create_cbv' %}" class="btn btn-info">Novo</a>
 

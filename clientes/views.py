@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
 from django.utils import timezone
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from .models import Person
 from .forms import PersonForm
@@ -47,7 +48,7 @@ def Persons_delete(request, id):
         person.delete()
         return redirect('person_list')
 
-    return render(request, 'person_delete_confirm.html', {'person': person})
+    return render(request, 'person_confirm_delete.html', {'person': person})
 
 
 class PersonList(ListView):
@@ -66,3 +67,14 @@ class PersonCreate(CreateView):
     model = Person
     fields = ['first_name', 'last_name', 'age', 'salary', 'bio', 'photo']
     success_url = '/clientes/person_list/'
+
+
+class PersonUpdate(UpdateView):
+    model = Person
+    fields = ['first_name', 'last_name', 'age', 'salary', 'bio', 'photo']
+    success_url = reverse_lazy('person_list_cbv')
+
+
+class PersonDelete(DeleteView):
+    model = Person
+    success_url = reverse_lazy('person_list_cbv')
