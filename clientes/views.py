@@ -12,43 +12,47 @@ from .forms import PersonForm
 def Persons_list(request):
     nome = request.GET.get('nome', None)
     sobrenome = request.GET.get('sobrenome', None)
+    footer_message = 'Desenvolvimento web com Django 2.2.10 - WMF'
 
     if nome or sobrenome:
         persons = Person.objects.all()
         persons = persons.filter(first_name__icontains=nome, last_name__icontains=sobrenome)
     else:
         persons = Person.objects.all()
-    return render(request, 'person.html', {'persons': persons})
+    return render(request, 'person.html', {'persons': persons, 'footer_message': footer_message})
 
 
 @login_required
 def Persons_new(request):
     form = PersonForm(request.POST, request.FILES, None)
+    footer_message = 'Desenvolvimento web com Django 2.2.10 - WMF'
     if form.is_valid():
         form.save()
         return redirect('person_list')
-    return render(request, 'person_form.html', {'form': form})
+    return render(request, 'person_form.html', {'form': form, 'footer_message': footer_message})
 
 @login_required
 def Persons_update(request, id):
     person = get_object_or_404(Person, pk=id)
     form = PersonForm(request.POST or None, request.FILES or None, instance=person)
+    footer_message = 'Desenvolvimento web com Django 2.2.10 - WMF'
 
     if form.is_valid():
         form.save()
         return redirect('person_list')
 
-    return render(request, 'person_form.html', {'form': form})
+    return render(request, 'person_form.html', {'form': form, 'footer_message': footer_message})
 
 @login_required
 def Persons_delete(request, id):
     person = get_object_or_404(Person, pk=id)
+    footer_message = 'Desenvolvimento web com Django 2.2.10 - WMF'
 
     if request.method == 'POST':
         person.delete()
         return redirect('person_list')
 
-    return render(request, 'person_confirm_delete.html', {'person': person})
+    return render(request, 'person_confirm_delete.html', {'person': person, 'footer_message': footer_message})
 
 
 class PersonList(ListView):
