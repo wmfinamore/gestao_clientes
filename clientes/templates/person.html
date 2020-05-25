@@ -44,11 +44,17 @@
                     <td> {{ p.salary }} </td>
                     <td><a href="{% url 'person_delete' p.id %}" ><span class="badge badge-danger">Exluir Registro</span></a></td>
                  </tr>
+            {% empty %}
+                    <strong>Nenhum cliente encontrado :( </strong><br><br>
             {% endfor %}
        </tbody>
     </table>
     <br>
     <a href="{% url 'person_new' %}" class="btn btn-primary">Novo</a>
+
+{% filter force_escape|lower %}
+    This text will be HTML-escaped, and will appear in all lowercase
+{% endfilter %}
 
 {% endblock %}
 
