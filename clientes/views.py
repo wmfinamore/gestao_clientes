@@ -46,13 +46,12 @@ def Persons_update(request, id):
 @login_required
 def Persons_delete(request, id):
     person = get_object_or_404(Person, pk=id)
-    footer_message = 'Desenvolvimento web com Django 2.2.10 - WMF'
 
     if request.method == 'POST':
         person.delete()
         return redirect('person_list')
 
-    return render(request, 'person_confirm_delete.html', {'person': person, 'footer_message': footer_message})
+    return render(request, 'person_confirm_delete.html', {'person': person})
 
 
 class PersonList(ListView):
