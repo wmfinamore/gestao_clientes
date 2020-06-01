@@ -1,5 +1,23 @@
+{% extends 'base.html' %}
+
+{% block main %}
 {{ now }}<br>
 {{ object.first_name }} <br>
 {{ object.last_name }}  <br>
 {{ object.age }} <br>
-{{ object.photo }}
+{{ object.photo }}<br>
+{{ object.doc }}<br>
+
+<h2> Vendas </h2>
+
+{% for venda in vendas %}
+    <p>Venda id: {{ venda.id }}</p>
+    <h3> Lista de Produtos </h3>
+        <ul>
+            {% for produto in venda.produtos.all %}
+            <Li>{{ produto.id }} - {{ produto.descricao }}</Li>
+            {% endfor %}
+        </ul>
+{% endfor %}
+
+{% endblock %}

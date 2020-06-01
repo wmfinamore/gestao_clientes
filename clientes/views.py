@@ -8,6 +8,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 
 from .models import Person
 from .models import Produto
+from .models import Venda
 from .forms import PersonForm
 
 
@@ -63,10 +64,16 @@ class PersonList(ListView):
 
 class PersonDetail(DetailView):
     model = Person
+    """Overrride de método nativo: forçou o Django realizar um left join
+    da tabela documentos, reduzindo um select em tempo de execução."""
+    def get_object(self, queryset=None):
+        pk = self.kwargs.get(self.pk_url_kwarg)
+        return Person.objects.select_related('doc').get(id=pk)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
         context['now'] = timezone.now()
+        context['vendas'] = Venda.objects.filter(pessoa_id=self.object.id)
         return context
 
 class PersonCreate(CreateView):
