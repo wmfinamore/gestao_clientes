@@ -41,5 +41,14 @@ class Venda(models.Model):
     pessoa =models.ForeignKey(Person, null=True, blank=True, on_delete=models.PROTECT)
     produtos = models.ManyToManyField(Produto, blank=True)
 
+    def get_total(self):
+        tot = 0
+        for produto in self.produtos:
+            tot += produto
+
+        tot = (tot - self.desconto) - self.desconto
+
+
+
     def __str__(self):
         return self.numero
