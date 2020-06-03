@@ -36,6 +36,8 @@ class VendaAdmin(admin.ModelAdmin):
     raw_id_fields = ('pessoa',)
     search_fields = ('id', 'pessoa__first_name', 'pessoa__doc__num_doc')
     actions = [nfe_emitida, nfe_nao_emitida]
+    # filter_vertical = ['produtos',]
+    filter_horizontal = ['produtos',]
 
 
 admin.site.register(Person, PersonAdmin)
