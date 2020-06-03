@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Person, Documento, Venda, Produto
+from .actions import nfe_emitida, nfe_nao_emitida
 
 
 class PersonAdmin(admin.ModelAdmin):
@@ -30,9 +31,11 @@ class PersonAdmin(admin.ModelAdmin):
 class VendaAdmin(admin.ModelAdmin):
     readonly_fields = ('desconto',)
     list_filter = ('pessoa__doc', 'desconto')
+    list_display = ('id', 'pessoa', 'get_total', 'nfe_emitida',)
     """raw_id_fields traz um campo de busca, ao invés de um drop down"""
     raw_id_fields = ('pessoa',)
     search_fields = ('id', 'pessoa__first_name', 'pessoa__doc__num_doc')
+    actions = [nfe_emitida, nfe_nao_emitida]
 
 
 admin.site.register(Person, PersonAdmin)
