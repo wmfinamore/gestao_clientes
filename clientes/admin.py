@@ -27,7 +27,11 @@ class PersonAdmin(admin.ModelAdmin):
 
 
 class VendaAdmin(admin.ModelAdmin):
+    readonly_fields = ('desconto',)
     list_filter = ('pessoa__doc', 'desconto')
+    """raw_id_fields traz um campo de busca, ao invés de um drop down"""
+    raw_id_fields = ('pessoa')
+    search_fields = ('id', 'pessoa__first_name', 'pessoa__doc__num_doc')
 
 
 admin.site.register(Person, PersonAdmin)
