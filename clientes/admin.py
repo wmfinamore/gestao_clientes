@@ -1,6 +1,5 @@
 from django.contrib import admin
-from .models import Person, Documento, Venda, Produto
-from .actions import nfe_emitida, nfe_nao_emitida
+from .models import Person, Documento
 
 
 class PersonAdmin(admin.ModelAdmin):
@@ -29,24 +28,11 @@ class PersonAdmin(admin.ModelAdmin):
     tem_foto.short_description = 'Possui foto'
 
 
-class VendaAdmin(admin.ModelAdmin):
-    readonly_fields = ('desconto',)
-    list_filter = ('pessoa__doc', 'desconto')
-    list_display = ('id', 'pessoa', 'get_total', 'nfe_emitida',)
-    """raw_id_fields traz um campo de busca, ao invés de um drop down"""
-    # raw_id_fields = ('pessoa',)
-    autocomplete_fields = ('pessoa','produtos')
-    search_fields = ('id', 'pessoa__first_name', 'pessoa__doc__num_doc')
-    actions = [nfe_emitida, nfe_nao_emitida]
-    # filter_vertical = ['produtos',]
-    # filter_horizontal = ['produtos',]
-
-
 class ProdutoAdmin(admin.ModelAdmin):
     list_display = ('descricao', 'preco')
     search_fields = ('descricao',)
 
+
 admin.site.register(Person, PersonAdmin)
 admin.site.register(Documento)
-admin.site.register(Venda, VendaAdmin)
-admin.site.register(Produto, ProdutoAdmin)
+

@@ -7,8 +7,8 @@ from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from .models import Person
-from .models import Produto
-from .models import Venda
+from produtos.models import Produto
+from vendas.models import Venda
 from .forms import PersonForm
 
 
