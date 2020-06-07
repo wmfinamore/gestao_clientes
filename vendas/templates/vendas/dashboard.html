@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+
+{% block main %}
+    <h1>Dashboard</h1>
+    <br>
+    <div class="card" style="width: 18rem;">
+        <div class="card-header">
+            Estatística das Vendas
+        </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Ticket Médio: {{ media|floatformat:2 }}</li>
+                <li class="list-group-item">Desconto Médio: {{ media_desc|floatformat:2 }}</li>
+                <li class="list-group-item">Pedido Menor Valor: {{ min|floatformat:2 }}</li>
+                <li class="list-group-item">Pedido Maior Valor: {{ max|floatformat:2 }}</li>
+                <li class="list-group-item">Quantidade Total: {{ qtd }}</li>
+                <li class="list-group-item">Quantidade Total com NF: {{ qtd_fiscal }}</li>
+            </ul>
+     </div>
+{% endblock %}
