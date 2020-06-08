@@ -4,6 +4,7 @@ from clientes.models import Person
 from produtos.models import Produto
 from django.db.models.signals import m2m_changed, post_save
 from django.dispatch import receiver
+from .managers import VendaManager
 
 
 class Venda(models.Model):
@@ -14,6 +15,8 @@ class Venda(models.Model):
     pessoa = models.ForeignKey(Person, null=True, blank=True, on_delete=models.PROTECT)
     # produtos = models.ManyToManyField(Produto, blank=True)
     nfe_emitida = models.BooleanField(default=False)
+
+    objects = VendaManager()
 
     def calcular_total(self):
         tot = self.itemdopedido_set.all().aggregate(
