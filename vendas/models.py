@@ -18,6 +18,13 @@ class Venda(models.Model):
 
     objects = VendaManager()
 
+    class Meta:
+        permissions = (
+            ('setar_nfe', 'Usuário pode alterar parâmetro NF-e'),
+            ('permissao2', 'Permissão 2'),
+            ('permissao3', 'Permissão 3'),
+        )
+
     def calcular_total(self):
         tot = self.itemdopedido_set.all().aggregate(
             tot_ped=Sum((F('quantidade') * F('produto__preco')) * (1- F('desconto')), output_field=FloatField())
