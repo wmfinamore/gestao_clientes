@@ -28,6 +28,8 @@ def Persons_list(request):
 
 @login_required
 def Persons_new(request):
+    if not request.user.has_perm('clientes.add_person'):
+        return HttpResponse('Não Autorizado')
     form = PersonForm(request.POST, request.FILES, None)
     footer_message = 'Desenvolvimento web com Django 2.2.10 - WMF'
     if form.is_valid():
