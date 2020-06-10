@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views import View
@@ -60,11 +61,11 @@ def Persons_delete(request, id):
     return render(request, 'person_confirm_delete.html', {'person': person})
 
 
-class PersonList(ListView):
+class PersonList(LoginRequiredMixin, ListView):
     model = Person
 
 
-class PersonDetail(DetailView):
+class PersonDetail(LoginRequiredMixin, DetailView):
     model = Person
     """Overrride de método nativo: forçou o Django realizar um left join
     da tabela documentos, reduzindo um select em tempo de execução."""
@@ -78,19 +79,20 @@ class PersonDetail(DetailView):
         context['vendas'] = Venda.objects.filter(pessoa_id=self.object.id)
         return context
 
-class PersonCreate(CreateView):
+class PersonCreate(LoginRequiredMixin, CreateView):
     model = Person
     fields = ['first_name', 'last_name', 'age', 'salary', 'bio', 'photo']
     success_url = '/clientes/person_list/'
 
 
-class PersonUpdate(UpdateView):
+class PersonUpdate(LoginRequiredMixin, UpdateView):
     model = Person
     fields = ['first_name', 'last_name', 'age', 'salary', 'bio', 'photo']
     success_url = reverse_lazy('person_list_cbv')
 
 
-class PersonDelete(DeleteView):
+class PersonDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    permission_required = ('clientes.sumir_clientes',)
     model = Person
     # success_url = reverse_lazy('person_list_cbv')
 

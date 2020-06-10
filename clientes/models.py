@@ -19,6 +19,12 @@ class Person(models.Model):
     photo = models.ImageField(upload_to='clients_photos', null=True, blank=True)
     doc = models.OneToOneField(Documento, null=True, blank=True, on_delete=models.CASCADE)
 
+    class Meta:
+        permissions = (
+            ('excluir_clientes', 'Excluir Clientes'),
+            ('sumir_clientes', 'Sumir com clientes'),
+        )
+
     @property
     def nome_completo(self):
         return self.first_name + ' ' + self.last_name
