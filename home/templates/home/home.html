@@ -15,7 +15,8 @@
         <div class="col-sm">
             {% if user.is_authenticated %}
             <p>Olá {{ user.username }}</p>
-            <a href="{% url 'logout' %}"><span class="badge badge-dark">Sair</span></a>
+            <a href="{% url 'logout' %}"><span class="badge badge-dark">Sair</span></a><br>
+            <a href="{% url 'password_change' %}">Alterar senha</a>
             {% else %}
                 <a href="{% url 'login' %}" class="btn btn-info">Entrar</a>
             {% endif %}

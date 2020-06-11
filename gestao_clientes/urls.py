@@ -22,6 +22,7 @@ from vendas import urls as vendas_urls
 from clientes import urls as clientes_urls
 from home import urls as home_urls
 from gestao_clientes import settings
+from django.contrib.auth import urls
 
 urlpatterns = [
     path('', include(home_urls)),
