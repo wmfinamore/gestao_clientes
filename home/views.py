@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, render_to_response
 from django.contrib.auth import logout
 from django.views.generic import TemplateView
 from django.views.generic.base import View
@@ -25,5 +25,10 @@ class HomePageView(TemplateView):
 
 class MyView(View):
     def get(self, request, *args, **kwargs):
+        response = render_to_response('home/home3.html')
+        response.set_cookie('cor', 'blue', max_age=1000)
+        mycookie = request.COOKIES.get('cor')
+        print(mycookie)
+        return response
         # return HttpResponse('Hello World!')
-        return render(request, 'home/home3.html')
+        # return render(request, 'home/home3.html')
