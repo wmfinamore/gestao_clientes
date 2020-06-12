@@ -6,7 +6,7 @@
 {% block main %}
 
     {% if user.is_authenticated %}
-    <br><strong>Olá {{ user.username }}</strong>
+    <br><strong>{{ request.session.message }}</strong>
         <a href="{% url 'logout' %}"><span class="badge badge-secondary">Sair</span></a>
     {% endif %}
     <br>
