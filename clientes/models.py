@@ -53,8 +53,8 @@ class Person(models.Model):
         #     fail_silently=False,
         # )
 
-        message1 = ('Subject here', 'Here is the message', 'finamore.wm+m1@gmail.com', ['finamore.wm+m1@gmail.com', 'wmfinamore@hotmail.com'])
-        message2 = ('Another subject', 'Here is another message', 'finamore.wm+m2@gmail.com', ['finamore.wm+m1@gmail.com', 'wmfinamore@hotmail.com'])
+        message1 = ('Subject here', 'Here is the message', 'teste@gmail.com', ['teste@gmail.com', 'teste@hotmail.com'])
+        message2 = ('Another subject', 'Here is another message', 'teste@gmail.com', ['teste@gmail.com', 'teste@hotmail.com'])
         send_mass_mail((message1, message2), fail_silently=False)
 
     def __str__(self):
