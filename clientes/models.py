@@ -37,6 +37,7 @@ class Person(models.Model):
         data = {'cliente': self.first_name}
         plain_text = render_to_string('clientes/emails/novo_cliente.txt', data)
         html_email = render_to_string('clientes/emails/novo_cliente.html', data)
+
         # send_mail(
         #     'Novo cliente cadastrado',
         #     plain_text,

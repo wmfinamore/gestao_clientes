@@ -31,7 +31,6 @@ ALLOWED_HOSTS = ['*']
 
 INTERNAL_IPS = ['127.0.0.1']
 
-ADMINS = [('Willian', 'teste@gmail.com'), ('Finamore', 'teste@hotmail.com'), ]
 # Application definition
 
 INSTALLED_APPS = [
@@ -157,4 +156,3 @@ EMAIL_PORT = config('EMAIL_PORT')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = config('EMAIL_USE_TLS')
-SERVER_EMAIL = config('SERVER_EMAIL')
