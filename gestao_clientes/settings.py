@@ -25,11 +25,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '$vb^q+=iwv!eq$(b_)t71qm99hz@&kx&hb@d_*i+9#v4*66tta'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
 INTERNAL_IPS = ['127.0.0.1']
+
+# ADMINS = [('Willian', 'teste@gmail.com'),]
 
 # Application definition
 
