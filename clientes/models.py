@@ -1,5 +1,5 @@
 from django.db import models
-from django.core.mail import send_mail
+from django.core.mail import send_mail, mail_admins
 from django.db.models.signals import m2m_changed
 from django.dispatch import receiver
 from django.template.loader import render_to_string
@@ -42,6 +42,13 @@ class Person(models.Model):
             plain_text,
             'teste@gmail.com',
             ['teste@hotmail.com'],
+            html_message=html_email,
+            fail_silently=False,
+        )
+
+        mail_admins(
+            'Novo cliente cadastrado',
+            plain_text,
             html_message=html_email,
             fail_silently=False,
         )
