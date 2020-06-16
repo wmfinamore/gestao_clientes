@@ -1,6 +1,8 @@
 from django.db import models
+from django.core.mail import send_mail
 from django.db.models.signals import m2m_changed
 from django.dispatch import receiver
+from django.template.loader import render_to_string
 
 
 class Documento(models.Model):
@@ -28,6 +30,21 @@ class Person(models.Model):
     @property
     def nome_completo(self):
         return self.first_name + ' ' + self.last_name
+
+    def save(self, *args, **kwargs):
+        super(Person, self).save(*args, **kwargs)
+
+        data = {'cliente': self.first_name}
+        plain_text = render_to_string('clientes/emails/novo_cliente.txt', data)
+        html_email = render_to_string('clientes/emails/novo_cliente.html', data)
+        send_mail(
+            'Novo cliente cadastrado',
+            plain_text,
+            'teste@gmail.com',
+            ['teste@hotmail.com'],
+            html_message=html_email,
+            fail_silently=False,
+        )
 
     def __str__(self):
         return self.first_name + ' ' + self.last_name
