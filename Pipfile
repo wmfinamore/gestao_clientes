@@ -16,6 +16,7 @@ gunicorn = "*"
 django-bootstrap-form = "*"
 django-debug-toolbar = "*"
 django-smtp-ssl = "*"
+django-allauth = "*"
 
 [requires]
 python_version = "3.7"

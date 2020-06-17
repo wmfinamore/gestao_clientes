@@ -30,6 +30,7 @@ urlpatterns = [
     path('produtos/', include(produtos_urls)),
     path('vendas/', include(vendas_urls)),
     path('admin/', admin.site.urls),
+    path('accounts/', include('allauth.urls')),
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('', include('django.contrib.auth.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
