@@ -40,7 +40,6 @@ def Persons_new(request):
 
 @login_required
 def Persons_update(request, id):
-    1/0
     person = get_object_or_404(Person, pk=id)
     form = PersonForm(request.POST or None, request.FILES or None, instance=person)
     footer_message = 'Desenvolvimento web com Django 2.2.10 - WMF'
