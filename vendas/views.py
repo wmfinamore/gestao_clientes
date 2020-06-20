@@ -5,6 +5,25 @@ from .models import Venda, ItemDoPedido
 from .forms import ItemPedidoForm
 
 
+class ListaVendas(View):
+    def get(self, request):
+        vendas = Venda.objects.all()
+        return render(request, 'vendas/lista-vendas.html', {'vendas': vendas})
+
+
+class EditPedido(View):
+    def get(self, request, venda):
+        data = {}
+        venda = Venda.objects.get(id=venda)
+        data['form_item'] = ItemPedidoForm()
+        data['numero'] = venda.numero
+        data['desconto'] = float(venda.desconto)
+        data['venda'] = venda
+        data['itens'] = venda.itemdopedido_set.all()
+
+        return render(request, 'vendas/novo-pedido.html', data)
+
+
 class DashboardView(View):
     def dispatch(self, request, *args, **kwargs):
         if not request.user.has_perm('vendas.ver_dashboard'):
@@ -37,11 +56,11 @@ class NovoPedido(View):
         data = {}
         data['form_item'] = ItemPedidoForm()
         data['numero'] = request.POST['numero']
-        data['desconto'] = float(request.POST['desconto'])
-        data['venda'] = request.POST['venda_id']
+        data['desconto'] = float(request.POST['desconto'].replace(',', '.'))
+        data['venda_id'] = request.POST['venda_id']
 
-        if data['venda']:
-            venda = Venda.objects.get(id=data['venda'])
+        if data['venda_id']:
+            venda = Venda.objects.get(id=data['venda_id'])
             venda.desconto = data['desconto']
             venda.numero = data['numero']
             venda.save()
@@ -51,7 +70,7 @@ class NovoPedido(View):
             )
 
         itens = venda.itemdopedido_set.all()
-        data['venda_obj'] = venda
+        data['venda'] = venda
         data['itens'] = itens
         return render(request, 'vendas/novo-pedido.html', data)
 
@@ -73,8 +92,7 @@ class NovoItemPedido(View):
         data['form_item'] = ItemPedidoForm()
         data['numero'] = item.venda.numero
         data['desconto'] = item.venda.desconto
-        data['venda'] = item.venda.id
-        data['venda_obj'] = item.venda
+        data['venda'] = item.venda
         data['itens'] = item.venda.itemdopedido_set.all()
 
         return render(
