@@ -16,7 +16,7 @@
         <input type="hidden" value="{{venda.id}}" name="venda_id">
 
         <br>
-        <button type="submit" class="btn btn-main">Enviar</button>
+        <button type="submit" class="btn btn-primary">Enviar</button>
     </form>
 
 {% endblock %}
@@ -52,4 +52,7 @@
             </tbody>
         </table>
     {% endif %}
+
+    <a href="{% url 'lista-vendas' %}" class="btn btn-secondary">Voltar para lista</a>
+
 {% endblock %}

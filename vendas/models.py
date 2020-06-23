@@ -38,7 +38,7 @@ class Venda(models.Model):
 
 
 class ItemDoPedido(models.Model):
-    venda = models.ForeignKey(Venda, on_delete=models.PROTECT)
+    venda = models.ForeignKey(Venda, on_delete=models.CASCADE)
     produto = models.ForeignKey(Produto, on_delete=models.PROTECT)
     quantidade = models.FloatField()
     desconto = models.DecimalField(max_digits=5, decimal_places=2)

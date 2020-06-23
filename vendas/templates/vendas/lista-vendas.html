@@ -26,9 +26,12 @@
                             Editar
                         </a>
                     </td>
+                    <td><a href="{% url 'delete-pedido' venda.id %}">Excluir</a></td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
+
+    <a href="{% url 'novo-pedido' %}" class="btn btn-info">Novo Pedido</a>
 
 {% endblock %}
