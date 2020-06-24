@@ -1,4 +1,5 @@
 from django import forms
+from .models import ItemDoPedido
 
 
 class ItemPedidoForm(forms.Form):
@@ -6,3 +7,10 @@ class ItemPedidoForm(forms.Form):
     quantidade = forms.IntegerField(label='Quantidade')
     desconto = forms.DecimalField(
         label='Desconto', max_digits=7, decimal_places=2)
+
+
+class ItemDoPedidoModelForm(forms.ModelForm):
+    class Meta:
+        model = ItemDoPedido
+        # fields = '__all__'
+        fields = ['quantidade', 'desconto']
