@@ -3,6 +3,9 @@
 
 
 {% block main %}
+    {% if mensagem %}
+        {{ mensagem }}
+    {% endif %}
     <h1>Novo Pedido</h1>
     <br>
     <form method="post" action="{% url 'novo-pedido' %}">
@@ -19,6 +22,8 @@
         <br>
         <button type="submit" class="btn btn-primary">Enviar</button>
     </form>
+    <br>
+    <b>Total: R${{ venda.valor }} </b>
     <br>
 {% endblock %}
 

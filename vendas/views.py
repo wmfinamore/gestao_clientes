@@ -81,17 +81,26 @@ class NovoItemPedido(View):
 
     def post(self, request, venda):
         data = {}
-        item = ItemDoPedido.objects.create(
-            produto_id=request.POST['produto_id'],
-            quantidade=request.POST['quantidade'],
-            desconto=request.POST['desconto'],
-            venda_id=venda
-        )
+
+        item = ItemDoPedido.objects.filter(
+            produto_id=request.POST['produto_id'], venda_id=venda)
+        if item:
+            data['mensagem'] = 'Item já incluido no pedido. Edite o item para alterar a quantidade e desconto.'
+            item = item[0]
+        else:
+
+            item = ItemDoPedido.objects.create(
+                produto_id=request.POST['produto_id'],
+                quantidade=request.POST['quantidade'],
+                desconto=request.POST['desconto'],
+                venda_id=venda
+            )
 
         data['item'] = item
         data['form_item'] = ItemPedidoForm()
         data['numero'] = item.venda.numero
         data['desconto'] = item.venda.desconto
+
         data['venda'] = item.venda
         data['itens'] = item.venda.itemdopedido_set.all()
 
@@ -125,6 +134,7 @@ class DeleteItem(View):
         venda_id = item_pedido.venda.id
         item_pedido.delete()
         return redirect('edit-pedido', venda=venda_id)
+
 
 class EditItem(View):
     def get(self, request, item):
