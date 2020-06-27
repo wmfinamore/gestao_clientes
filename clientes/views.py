@@ -1,3 +1,4 @@
+from django.forms import model_to_dict
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
@@ -128,5 +129,15 @@ class ProdutoBulk(View):
 
 
 def api(request):
-    a = {'nome': 'Willian', 'idade': 37, 'salario': 1000 ,}
-    return JsonResponse(a, status=200)
+    # a = {'nome': 'Willian', 'idade': 37, 'salario': 1000 ,}
+
+    # produto = Produto.objects.last()
+    # b = {'descricao': produto.descricao, 'preço': produto.preco}
+    # b = model_to_dict(produto)
+
+    produtos = Produto.objects.all()
+    list = []
+    for produto in produtos:
+        list.append(model_to_dict(produto))
+
+    return JsonResponse(list, status=200, safe=False)
