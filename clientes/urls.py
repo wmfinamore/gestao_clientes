@@ -2,7 +2,7 @@ from django.urls import path
 from .views import Persons_list, Persons_new, Persons_update, Persons_delete
 from .views import PersonList, PersonDetail, PersonCreate, PersonUpdate, PersonDelete
 from .views import ProdutoBulk
-from .views import api
+from .views import api, APICBV
 
 
 urlpatterns = [
@@ -17,4 +17,5 @@ urlpatterns = [
     path('person_delete/<int:pk>', PersonDelete.as_view(), name='person_delete_cbv'),
     path('produto_bulk/', ProdutoBulk.as_view()),
     path('api/', api, name='api'),
+    path('apicbv/', APICBV.as_view(), name='apicbv'),
 ]
